@@ -12,7 +12,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Symlink comodo
-# RUN ln -s /usr/bin/python2.7 /usr/bin/python
+WORKDIR /app
+COPY . /app
 
 CMD ["bash"]
