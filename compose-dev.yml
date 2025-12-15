@@ -8,7 +8,27 @@ services:
       command: python2.7 server.py
       ports:
         - 40443:4443
-    client:
+    voti-tatooine:
+      build: .
+      environment:
+        - DISPLAY=${DISPLAY}
+      working_dir: /app
+      volumes:
+        - .:/app
+        - /tmp/.X11-unix:/tmp/.X11-unix
+      command: python2.7 comunica_i_voti.py TATOOINE
+      depends_on:
+        - server
+    voti-alderaan:
+      build: .
+      environment:
+        - DISPLAY=${DISPLAY}
+      working_dir: /app
+      volumes:
+        - .:/app
+        - /tmp/.X11-unix:/tmp/.X11-unix
+      command: python2.7 comunica_i_voti.py ALDERAAN
+    voti-coruscant:
       build: .
       environment:
         - DISPLAY=${DISPLAY}

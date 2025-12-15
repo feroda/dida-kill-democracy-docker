@@ -1,5 +1,7 @@
 risultati.txt
 *.swp
+*.old
+*.bak
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
