@@ -20,9 +20,9 @@ def riequilibrare_i_voti(a, b, bianche, nulle):
 
     return a,b,bianche,nulle
 
-def invia_i_voti(a, b, bianche, nulle, voti_inseriti):
+def invia_i_voti(seggio, a, b, bianche, nulle, voti_inseriti):
 
-    voti_da_inviare = "|".join(map(str, [a, b, bianche, nulle]))
+    voti_da_inviare = "|".join(map(str, [seggio, a, b, bianche, nulle]))
     user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
     values = { "voti" : voti_da_inviare }
 
@@ -83,7 +83,7 @@ def main(argv):
     #subprocess.call(['/usr/bin/zenity', '--info', '--title=VOTI', '--text=<span font-family=\"sans\" font-weight=\"900\" font-size=\"xx-large\">Inseriti %s\nRiequilibrati %s\n</span>' % (voti_inseriti, voti_riequilibrati)])
     #print "I voti riequilibrati sono %s " % voti_riequilibrati
 
-    invia_i_voti(p_A, p_B, bianche, nulle, voti_inseriti)
+    invia_i_voti(seggio, p_A, p_B, bianche, nulle, voti_inseriti)
 
 if __name__ == "__main__":
     main(sys.argv)

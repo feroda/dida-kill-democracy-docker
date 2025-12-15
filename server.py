@@ -19,16 +19,16 @@ class VotiHTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         f.write(voti + '\n')
         f.close()
 
-        a,b,bianche,nulle = voti.split("|")
+        seggio,a,b,bianche,nulle = voti.split("|")
 
         voti_list = """
-ESITO VOTAZIONI
+ESITO VOTAZIONI di %s
 
 * ALLEANZA RIBELLE = %s
 * IMPERO GALATTICO = %s
 * Bianche = %s
 * Nulle = %s
-""" % (a, b, bianche, nulle)
+""" % (seggio, a, b, bianche, nulle)
         
         #subprocess.call(['/usr/bin/zenity', '--info', '--title=ESITO VOTAZIONI', '--text=<span font-family=\"sans\" font-weight=\"900\" font-size=\"xx-large\">Il popolo ha votato %s\n</span>' % (voti_list)])
         #BACKGROUND subprocess.call('/usr/bin/zenity --info --title=ESITO VOTAZIONI --text=\'<span font-family=\"sans\" font-weight=\"900\" font-size=\"xx-large\">Il popolo ha votato %s\n</span>\' &' % (voti_list), shell=True)
@@ -44,7 +44,7 @@ ESITO VOTAZIONI
 <body>
 <h1> RISULTATI GALAXOCRACY - 3042 </h2>
 <table border="1">
-    <tr><th>ALLEANZA RIBELLE</th><th>IMPERO GALATTICO</th><th>BIANCHE</th><th>NULLE</th></tr>
+    <tr><th>SEGGIO</th><th>ALLEANZA RIBELLE</th><th>IMPERO GALATTICO</th><th>BIANCHE</th><th>NULLE</th></tr>
 """
         for line in f.readlines():
             content += "<tr><td>%s</td></tr>" % (line.replace("|","</td><td>"))
