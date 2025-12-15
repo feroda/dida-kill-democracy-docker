@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import subprocess, sys, urllib, urllib2
+import subprocess, sys, urllib, urllib2, ssl
 
-HTTP_PROTOCOL = 'https'
+SERVER_ENDPOINT = 'https://server:4443'
 
 #---------------------------------------------------------------
 
@@ -23,15 +23,17 @@ def riequilibrare_i_voti(a, b, bianche, nulle):
 def invia_i_voti(a, b, bianche, nulle, voti_inseriti):
 
     voti_da_inviare = "|".join(map(str, [a, b, bianche, nulle]))
-    url = '%s://localhost:4443' % HTTP_PROTOCOL
     user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
     values = { "voti" : voti_da_inviare }
 
     header = { 'User-Agent' : user_agent }
     data = urllib.urlencode(values)
-    req = urllib2.Request(url, data, header) 
+    req = urllib2.Request(SERVER_ENDPOINT, data, header) 
 
-    response = urllib2.urlopen(req)
+    # SSL CONTEXT NON VERIFICANTE
+    ctx = ssl._create_unverified_context()
+
+    response = urllib2.urlopen(req, context=ctx)
     a,b,bianche,nulle = voti_inseriti.split("|")
 
     voti_list = """
